@@ -44,13 +44,13 @@
                 <v-card :elevation="18" style="margin-bottom: 60px;">
                     <v-card-text class="text-primary">
                         <!--<line-chart :width="300" :height="180"></line-chart>-->
-                        <reactive :width="300" :height="180" :chart-data="datacollection1"></reactive>
+                        
                     </v-card-text>
                 </v-card>
 
                 <v-card>
                     <v-card-text class="text-primary">
-                        <line-chart :width="300" :height="180"></line-chart>
+                        <!--<line-chart :width="300" :height="180"></line-chart>-->
                         <reactive :width="300" :height="180" :chart-data="datacollection2"></reactive>
                     </v-card-text>
                 </v-card>
@@ -104,7 +104,6 @@
 
 <script>
 import DigitalClock from "vue-digital-clock";
-//import LineChart from '@/components/LineChart';
 import Reactive from '@/components/Reactive';
 import VueWeatherComponent from 'vue-weather-component';
 import MarqueeText from 'vue-marquee-text-component';
@@ -120,11 +119,17 @@ export default {
         MarqueeText
     },
     created () {
-        this.fetchData();
+        this.testAPI();
+        //this.getLastEvent();
+        this.getConsumption();
         this.fillData1();
         this.fillData2();
     },
+    mounted () {
+        this.fillData();
+    },
     data () {
+        datacollection2: {},
         return {
             datacollection1: null,
             datacollection2: null,
@@ -174,10 +179,10 @@ export default {
         }
     },
     methods: {
-        fetchData () {
+        testAPI () {
             let api_url = process.env.VUE_APP_APIURL;
             
-            var config = {
+            let config = {
                 headers: {'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImMwMWI0OWI3LWI5MWMtNDUyMi1hYTY3LWFhYTQzZTVmZjBkNCIsImp0aSI6IjVjZTYzZDczLTUxMWItNDcyNi04NzFmLWY4NzAxNGY2NGVjNCIsImlzcyI6Imh0dHBzOi8vYXBpLnV5aWtvLmZvc2Muc3BhY2UifQ.Lqud-gwA6HJwcmtLk_atkmPLxF984h-2aRo8mgAUmZU'}
             };
 
@@ -197,6 +202,34 @@ export default {
                 console.log(error)
             });
         },
+        getLastEvent () {
+
+        },
+        getConsumption () {
+            let buildingId = 'd37fc422-0462-4c48-a54c-846258d0944a';
+            let initInterval = '01/05/2018';
+            let finishInterval = '01/06/2018';
+
+            let api_url = process.env.VUE_APP_APIURL;
+            let config = {
+                headers: {'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImMwMWI0OWI3LWI5MWMtNDUyMi1hYTY3LWFhYTQzZTVmZjBkNCIsImp0aSI6IjVjZTYzZDczLTUxMWItNDcyNi04NzFmLWY4NzAxNGY2NGVjNCIsImlzcyI6Imh0dHBzOi8vYXBpLnV5aWtvLmZvc2Muc3BhY2UifQ.Lqud-gwA6HJwcmtLk_atkmPLxF984h-2aRo8mgAUmZU'}
+            };
+
+            axios.get(
+                api_url + '/Consumption/interval?buildingId=' + buildingId + '&start=' + initInterval + '&finish=' + finishInterval,
+                config
+            ).then((response) => {
+                // eslint-disable-next-line no-console
+                console.log(response)
+                this.datacollection2.datasets.data = response.data
+                // eslint-disable-next-line no-console
+                console.log(datacollection2)
+            }).catch((error) => {
+                // eslint-disable-next-line no-console
+                console.log(error)
+            });
+
+        },
         fillData1 () {
             this.datacollection1 = {
                 // Data for the y-axis of the chart
@@ -214,13 +247,21 @@ export default {
         fillData2 () {
             this.datacollection2 = {
                 // Data for the y-axis of the chart
-                labels: ['Jan', 'Feb,', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
+                labels: ['5/18', '6/18,', '7/18', '8/18', '9/18', '10/18', '11/18', '12/18', '01/19', '02/19', '03/19', '4/19'],
                 datasets: [
                     {
                         label: 'Data One',
+                        yAxisID: 'A',
                         backgroundColor: '#f87979',
                         // Data for the x-axis of the chart
                         data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
+                    },
+                    {
+                        label: 'Data Two',
+                        yAxisID: 'B',
+                        backgroundColor: '#f83979',
+                        // Data for the x-axis of the chart
+                        data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()] 
                     }
                 ]
             }

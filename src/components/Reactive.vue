@@ -13,13 +13,27 @@ export default {
             options: {
                 scales: {
                     yAxes: [{
+                        id: 'A',
+                        type: 'linear',
+                        position: 'left',
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            display: true
+                        },
+                    },{
+                        id: 'B',
+                        type: 'linear',
+                        position: 'right',
                         ticks: {
                             beginAtZero: true
                         },
                         gridLines: {
                             display: true
                         }
-                    }],
+                    }  
+                    ],
                     xAxes: [{
                         gridLines: {
                             display: false
