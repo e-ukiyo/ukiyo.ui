@@ -1,8 +1,5 @@
 <template>
     <v-app>
-        <!-- App Navigation -->
-
-
         <v-content transition="slide-x-transition">
             <router-view></router-view>
         </v-content>
@@ -10,8 +7,9 @@
 </template>
 
 <script>
+
 export default {
-    name: 'App' 
+    name: 'App',
 };
 </script>
 <style>

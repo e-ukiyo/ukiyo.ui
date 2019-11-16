@@ -1,6 +1,26 @@
 <template>
     <v-container fluid fill-height class="home-hero">
-        <v-row style="margin-top: -150px;">
+        <v-row style="margin-top: -130px;">
+            <v-col align="left" style="margin-left: 20px;">
+                <v-img
+                    src="../assets/Ayylogocircle.png"
+                    aspect-ratio="1"
+                    max-width="60"
+                    max-height="60"
+                ></v-img>
+            </v-col>
+
+            <v-col align="right" style="margin-right: 20px;">
+                <v-img
+                    src="../assets/Userlogocircle.png"
+                    aspect-ratio="1"
+                    max-width="60"
+                    max-height="60"
+                ></v-img>
+            </v-col>
+        </v-row>
+
+        <v-row style="margin-top: -180px;">
             <v-col style="margin-left: 40px;">
                 <!--
                     <v-card class="mx-auto" max-width="400">
@@ -52,16 +72,6 @@
                             </v-card>
                         </v-col>
                     </v-row>
-
-                    <v-row>
-                        
-                    </v-row>
-
-                    <v-row>
-                        <v-col>
-                            
-                        </v-col>
-                    </v-row>
                 </div>
 
                 <!--
@@ -110,7 +120,7 @@ export default {
         MarqueeText
     },
     created () {
-        //this.fetchData();
+        this.fetchData();
         this.fillData1();
         this.fillData2();
     },
@@ -166,16 +176,16 @@ export default {
     methods: {
         fetchData () {
             var config = {
-                headers: {'Authorization': 'Bearer ' + 'asdasdasdasd'}
+                headers: {'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImMwMWI0OWI3LWI5MWMtNDUyMi1hYTY3LWFhYTQzZTVmZjBkNCIsImp0aSI6IjVjZTYzZDczLTUxMWItNDcyNi04NzFmLWY4NzAxNGY2NGVjNCIsImlzcyI6Imh0dHBzOi8vYXBpLnV5aWtvLmZvc2Muc3BhY2UifQ.Lqud-gwA6HJwcmtLk_atkmPLxF984h-2aRo8mgAUmZU'}
             };
 
-            var bodyParameters = {
-                key: "value"
-            }
+            // var bodyParameters = {
+            //     key: "value"
+            // }
 
-            axios.post(
-                'http://api.ukiyo.fosc.space/api/v1/{ID}/day',
-                bodyParameters,
+            axios.get(
+                'https://api.ukiyo.fosc.space/api/v1/Authenticate/test',
+                //bodyParameters,
                 config
             ).then((response) => {
                 // eslint-disable-next-line no-console
@@ -223,7 +233,7 @@ export default {
 
 <style scoped>
 .home-hero {
-    background: url('../assets/BG_BLUR.jpg');
+    background: url('../assets/BG_BLUR2.jpg');
     background-size: cover;
     width: 100%;
     height: 100%;
