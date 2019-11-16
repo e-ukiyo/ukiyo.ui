@@ -50,7 +50,7 @@
 
                 <v-card>
                     <v-card-text class="text-primary">
-                        <line-chart :width="300" :height="180"></line-chart>
+<!--                        <line-chart :width="300" :height="180"></line-chart>-->
                         <reactive :width="300" :height="180" :chart-data="datacollection2"></reactive>
                     </v-card-text>
                 </v-card>
