@@ -175,6 +175,8 @@ export default {
     },
     methods: {
         fetchData () {
+            let api_url = process.env.VUE_APP_APIURL;
+            
             var config = {
                 headers: {'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImMwMWI0OWI3LWI5MWMtNDUyMi1hYTY3LWFhYTQzZTVmZjBkNCIsImp0aSI6IjVjZTYzZDczLTUxMWItNDcyNi04NzFmLWY4NzAxNGY2NGVjNCIsImlzcyI6Imh0dHBzOi8vYXBpLnV5aWtvLmZvc2Muc3BhY2UifQ.Lqud-gwA6HJwcmtLk_atkmPLxF984h-2aRo8mgAUmZU'}
             };
@@ -184,7 +186,7 @@ export default {
             // }
 
             axios.get(
-                'http://ukiyo.api/api/v1/Authenticate/test',
+                api_url + '/Authenticate/test',
                 //bodyParameters,
                 config
             ).then((response) => {
