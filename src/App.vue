@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
+import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
 
 export default {
     name: 'App',
@@ -18,6 +18,7 @@ export default {
             .build()
 
         this.hub.start().catch(function(err) {
+            // eslint-disable-next-line no-console
             return console.error(err.toSting());
         });
     },
