@@ -1,7 +1,7 @@
 <template>
     <v-container fluid fill-height class="home-hero">
-        <v-row style="margin-top: -120px;">
-            <v-col>
+        <v-row style="margin-top: -150px;">
+            <v-col style="margin-left: 40px;">
                 <!--
                     <v-card class="mx-auto" max-width="400">
                     <v-img class="white--text align-end" height="200px"
@@ -21,36 +21,42 @@
                     </v-card-actions>
                 </v-card>
                 -->
-                <v-card class="mx-auto" elevation="10" max-width="600" max-height="500">
-                    <v-card-title>Water</v-card-title>
-
+                <v-card :elevation="18" style="margin-bottom: 60px;">
                     <v-card-text class="text-primary">
-                        <line-chart :width="400" :height="200"></line-chart>
+                        <!--<line-chart :width="300" :height="180"></line-chart>-->
+                        <reactive :width="300" :height="180" :chart-data="datacollection1"></reactive>
                     </v-card-text>
+                </v-card>
 
+                <v-card>
                     <v-card-text class="text-primary">
-                        <line-chart :width="400" :height="200"></line-chart>
+                        <line-chart :width="300" :height="180"></line-chart>
+                        <reactive :width="300" :height="180" :chart-data="datacollection2"></reactive>
                     </v-card-text>
                 </v-card>
 
             </v-col>
 
-            <v-col >
+            <v-col>
                 <div class="display-4 font-weight-black white--text text-xs-center">
                     <v-row>
-                        <v-col style="padding-top: 0px; padding-left: 200px;">
+                        <v-col class="text-center" style="text-shadow: black 0.1em 0.1em 0.2em;">
                             <digital-clock :blink="true" />
                         </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col>
-                            <v-card class="mx-auto">
+
+                        <v-col style="margin-left: 50px; margin-right: 50px;">
+                            <v-card class="mx-auto" :elevation="18">
                                 <v-card-text>
                                     <weather title="" units="ca" :currentDay="currentDay" :forecast="forecast"></weather>
                                 </v-card-text>
                             </v-card>
                         </v-col>
                     </v-row>
+
+                    <v-row>
+                        
+                    </v-row>
+
                     <v-row>
                         <v-col>
                             
@@ -78,27 +84,40 @@
                 -->
             </v-col>
         </v-row>
+        <v-footer absolute dark>
+                <marquee-text :duration="30">
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.
+                </marquee-text>
+        </v-footer>
     </v-container>
 </template>
 
 <script>
 import DigitalClock from "vue-digital-clock";
-import LineChart from '@/components/LineChart';
+//import LineChart from '@/components/LineChart';
+import Reactive from '@/components/Reactive';
 import VueWeatherComponent from 'vue-weather-component';
+import MarqueeText from 'vue-marquee-text-component';
 import axios from 'axios';
 
 export default {
     name: 'HomeHero',
     components: {
         DigitalClock,
-        LineChart,
-        'weather': VueWeatherComponent
+//        LineChart,
+        Reactive,
+        'weather': VueWeatherComponent,
+        MarqueeText
     },
     created () {
         //this.fetchData();
+        this.fillData1();
+        this.fillData2();
     },
     data () {
         return {
+            datacollection1: null,
+            datacollection2: null,
             currentDay: {
                 icon: 'fog',
                 temp: '17',
@@ -165,6 +184,38 @@ export default {
                 // eslint-disable-next-line no-console
                 console.log(error)
             });
+        },
+        fillData1 () {
+            this.datacollection1 = {
+                // Data for the y-axis of the chart
+                labels: ['Jan', 'Feb,', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
+                datasets: [
+                    {
+                        label: 'Data One',
+                        backgroundColor: '#f87979',
+                        // Data for the x-axis of the chart
+                        data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
+                    }
+                ]
+            }
+        },
+        fillData2 () {
+            this.datacollection2 = {
+                // Data for the y-axis of the chart
+                labels: ['Jan', 'Feb,', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ag', 'Sept', 'Oct', 'Nov', 'Dic'],
+                datasets: [
+                    {
+                        label: 'Data One',
+                        backgroundColor: '#f87979',
+                        // Data for the x-axis of the chart
+                        data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
+                    }
+                ]
+            }
+        },
+        getRandomInt () {
+            // Generating random info XD
+            return Math.floor(Math.random() * (50-5+1)) +5
         }
     }
 };
