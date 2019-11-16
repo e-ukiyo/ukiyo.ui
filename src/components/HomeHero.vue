@@ -184,7 +184,7 @@ export default {
             // }
 
             axios.get(
-                'https://api.ukiyo.fosc.space/api/v1/Authenticate/test',
+                'http://ukiyo.api/api/v1/Authenticate/test',
                 //bodyParameters,
                 config
             ).then((response) => {
