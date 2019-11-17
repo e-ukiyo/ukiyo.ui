@@ -7,14 +7,15 @@
 </template>
 
 <script>
-import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
+import { HubConnectionBuilder, LogLevel, HttpTransportType } from '@aspnet/signalr';
 
 export default {
     name: 'App',
     created() {
         this.hub = new HubConnectionBuilder()
             .withUrl(process.env.VUE_APP_UIHUB, {
-                skipNegotiation: true
+                skipNegotiation: true,
+                transport: HttpTransportType.WebSockets
             })
             .configureLogging(LogLevel.Debug)
             .build();
