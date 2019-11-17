@@ -2,6 +2,7 @@
     <span>
         <navbar></navbar>
         <home-hero></home-hero>
+
     </span>
 </template>
 

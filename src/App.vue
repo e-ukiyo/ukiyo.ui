@@ -13,9 +13,11 @@ export default {
     name: 'App',
     created() {
         this.hub = new HubConnectionBuilder()
-            .withUrl(process.env.VUE_APP_UIHUB)
+            .withUrl(process.env.VUE_APP_UIHUB, {
+                skipNegotiation: true
+            })
             .configureLogging(LogLevel.Debug)
-            .build()
+            .build();
 
         this.hub.start().catch(function(err) {
             // eslint-disable-next-line no-console
