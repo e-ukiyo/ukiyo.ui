@@ -28,7 +28,7 @@ export default {
         // // ---------
         // var thisVue = this;
         // thisVue.connection.start();
-        // thisVue.connection.on("ReceiveMessage", function(user, message) {
+        // thisVue.hub.on("ReceiveMessage", function(user, message) {
         //     thisVue.messages.push({ user, message });
         // });
     }

@@ -142,13 +142,6 @@ export default {
         this.fillData1();
         this.fillData2();
     },
-    mounted() {
-        //this.fillData();
-        //this.$refs.appvue.hub.on("ReceiveMessage", function(user, message) {
-        //       // eslint-disable-next-line no-console
-        //        console.log(message) 
-        //});
-    },
     data() {
         return {
             datacollection1: null,
@@ -197,6 +190,9 @@ export default {
                 lowTemp: '-1'
             }]
         }
+    },
+    mounted: function() {
+        this.$
     },
     methods: {
         testAPI () {
