@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import Logged from '../views/Logged.vue';
 import VueChartJS from '@/views/VueChartJS';
 
 Vue.use(VueRouter);
@@ -15,6 +16,11 @@ const routes = [
         path: '/chartjs',
         name: 'VueChartJS',
         component: VueChartJS
+    },
+    {
+        path: 'logged',
+        name: 'Logged',
+        component: Logged
     },
     {
         path: '/about',

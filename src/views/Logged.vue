@@ -10,11 +10,10 @@ import HomeHero from '@/components/HomeHero';
 import navbar from '@/components/navbar';
 
 export default {
-    name: 'home',
+    name: 'logged',
     components: {
         HomeHero,
         navbar
     }
 };
 </script>
-
