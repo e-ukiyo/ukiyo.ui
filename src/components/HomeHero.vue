@@ -1,6 +1,6 @@
 <template>
     <v-container fluid fill-height class="home-hero">
-        <v-row style="margin-top: -130px;">
+        <v-row style="margin-top: -60px;">
             <v-col align="left" style="margin-left: 20px;">
                 <v-img
                     src="../assets/Ayylogocircle.png"
@@ -20,36 +20,70 @@
             </v-col>
         </v-row>
 
-        <v-row style="margin-top: -180px;">
+        <v-row style="margin-top: -100px;">
             <v-col style="margin-left: 40px;">
-                <!--
-                    <v-card class="mx-auto" max-width="400">
-                    <v-img class="white--text align-end" height="200px"
-                    src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
-                        <v-card-title>Top 10 Australian beaches</v-card-title>
-                    </v-img>
-
-                    <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
-
-                    <v-card-text class="text--primary">
-                        <div>Whitehaven Beach</div>
-                    </v-card-text>
-
-                    <v-card-actions>
-                        <v-btn color="orange" text>Share</v-btn>
-                        <v-btn color="orange" text>Explore</v-btn>
-                    </v-card-actions>
-                </v-card>
-                -->
                 <v-card :elevation="18" style="margin-bottom: 60px;">
-                    <v-card-text class="text-primary">
-                        <!--<line-chart :width="300" :height="180"></line-chart>-->
-                        
-                    </v-card-text>
+                    <v-card-title>
+                        <v-icon style="padding-right: 5px;">mdi-soccer</v-icon>
+                        Football Match! 
+                    </v-card-title>
+
+                    <v-row style="margin-top: -40px;">
+                        <v-col>
+                            <v-card-text class="text-primary">
+                                Tomorrow 11/27 22:00 at Helsingin Olympiastadion
+                            </v-card-text>
+
+                            <v-card-text class="text-primary">
+                                🇫🇮 Finland - Liechtenstein 🇫🇮
+                            </v-card-text>
+                        </v-col>
+                        <v-col align="right" style="padding-right: 40px;">
+                            <v-img
+                                src="../assets/Mapita.png"
+                                aspect-ratio="1"
+                                max-width="120"
+                                max-height="120"
+                            ></v-img>
+                        </v-col>
+                    </v-row>
                 </v-card>
 
-                <v-card>
-                    <v-card-text class="text-primary">
+                <v-card style="margin-top: -40px; margin-bottom: 20px;">
+                     <v-card-title>
+                         <v-icon style="padding-right: 5px;">mdi-school</v-icon>
+                         Graduation
+                    </v-card-title>
+
+                    <v-row style="margin-top: -40px;">
+                        <v-col align="left">
+                            <v-card-text class="text-primary">
+                                Saturday 11/30 21:00 at Aalto University
+                            </v-card-text>
+                            
+                            <v-card-text style="margin-top: -25px;">
+                                Weather prediction is raining! You should bring your umbrella
+                            </v-card-text>
+                        </v-col>
+                        <v-col align="right" style="padding-right: 40px;padding-top: 0px;">
+                            <v-img
+                                src="../assets/vk_seasons13.png"
+                                aspect-ratio="1"
+                                max-width="120"
+                                max-height="120"
+                            ></v-img>
+                        </v-col>
+                    </v-row>
+                    
+                </v-card>
+
+                <v-card style="margin-top: -0px;">
+                    <v-card-title>
+                        <v-icon style="padding-right: 5px;">mdi-flash</v-icon>
+                        Consumption
+                    </v-card-title>
+
+                    <v-card-text class="text-primary" style="margin-top: -20px;">
                         <reactive :width="300" :height="180" :chart-data="datacollection2"></reactive>
                     </v-card-text>
                 </v-card>
@@ -72,30 +106,14 @@
                         </v-col>
                     </v-row>
                 </div>
-
-                <!--
-                <v-icon light="true">mdi-xbox-controller</v-icon>
-                <div class="display-4 font-weight-black white--text text-xs-center mb-3">
-                    FOR YOUR TABLE
-                </div>
-                
-                <div class="display-1 font-weight-bold white--text text-xs-center">
-                    Finally be a foodie at home with fresh, chef-prepared meals delivered daily to your door.
-                </div>
-                <v-card>
-                    <v-card-text>1231312</v-card-text>
-                </v-card>
-                <v-divider></v-divider>
-                
-                <v-card>
-                    <v-card-text>adasd</v-card-text>
-                </v-card>
-                -->
             </v-col>
         </v-row>
+
         <v-footer absolute dark>
                 <marquee-text :duration="30">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.
+                    <v-icon style="padding-left: 15px; padding-right: 5px;">mdi-subway-variant</v-icon><b>Transport</b> <i>Aalto Metro is actually down, restarting on 18:59</i>
+                    <v-icon style="padding-left: 15px; padding-right: 5px;">mdi-book</v-icon><b>University</b> <i>Aalto library is now open</i>
+                    <v-icon style="padding-left: 15px; padding-right: 5px;">mdi-cake</v-icon><b>Social</b> <i>Todays is Luca's Birthday!</i> 
                 </marquee-text>
         </v-footer>
     </v-container>
@@ -117,18 +135,21 @@ export default {
         'weather': VueWeatherComponent,
         MarqueeText
     },
-    created () {
+    created() {
         this.testAPI();
         //this.getLastEvent();
         this.getConsumption();
         this.fillData1();
         this.fillData2();
     },
-    mounted () {
-        this.fillData();
+    mounted() {
+        //this.fillData();
+        //this.$refs.appvue.hub.on("ReceiveMessage", function(user, message) {
+        //       // eslint-disable-next-line no-console
+        //        console.log(message) 
+        //});
     },
-    data () {
-        datacollection2: {},
+    data() {
         return {
             datacollection1: null,
             datacollection2: null,
@@ -222,7 +243,7 @@ export default {
                 console.log(response)
                 this.datacollection2.datasets.data = response.data
                 // eslint-disable-next-line no-console
-                console.log(datacollection2)
+                console.log(this.datacollection2)
             }).catch((error) => {
                 // eslint-disable-next-line no-console
                 console.log(error)
@@ -249,16 +270,16 @@ export default {
                 labels: ['5/18', '6/18,', '7/18', '8/18', '9/18', '10/18', '11/18', '12/18', '01/19', '02/19', '03/19', '4/19'],
                 datasets: [
                     {
-                        label: 'Data One',
+                        label: 'Electricity (kWh)',
                         yAxisID: 'A',
-                        backgroundColor: '#f87979',
+                        backgroundColor: '#8b54b2',
                         // Data for the x-axis of the chart
                         data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
                     },
                     {
-                        label: 'Data Two',
+                        label: 'Water (m^3)',
                         yAxisID: 'B',
-                        backgroundColor: '#f83979',
+                        backgroundColor: '#ffe74b',
                         // Data for the x-axis of the chart
                         data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()] 
                     }
@@ -280,5 +301,4 @@ export default {
     width: 100%;
     height: 100%;
 }
-
 </style>

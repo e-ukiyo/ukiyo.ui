@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <v-app ref="appvue">
         <v-content transition="slide-x-transition">
             <router-view></router-view>
         </v-content>
