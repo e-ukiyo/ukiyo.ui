@@ -136,9 +136,9 @@ export default {
         MarqueeText
     },
     created() {
-        this.testAPI();
+        //this.testAPI();
         //this.getLastEvent();
-        this.getConsumption();
+        //this.getConsumption();
         this.fillData1();
         this.fillData2();
     },
