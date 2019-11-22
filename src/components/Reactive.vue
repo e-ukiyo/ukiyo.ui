@@ -12,8 +12,7 @@ export default {
             // ChartJS that control the appearance
             options: {
                 scales: {
-                    yAxes: [{
-                        id: 'A',
+                    yAxes: {
                         type: 'linear',
                         position: 'left',
                         ticks: {
@@ -21,19 +20,8 @@ export default {
                         },
                         gridLines: {
                             display: true
-                        },
-                    },{
-                        id: 'B',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        gridLines: {
-                            display: true
-                        }
-                    }  
-                    ],
+                        }, 
+                    },
                     xAxes: [{
                         gridLines: {
                             display: false

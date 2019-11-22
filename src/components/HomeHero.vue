@@ -84,7 +84,7 @@
                     </v-card-title>
 
                     <v-card-text class="text-primary" style="margin-top: -20px;">
-                        <reactive :width="300" :height="180" :chart-data="datacollection2"></reactive>
+                        <reactive  :width="300" :height="180" :chart-data="datacollection2"></reactive>
                     </v-card-text>
                 </v-card>
 
@@ -136,16 +136,19 @@ export default {
         MarqueeText
     },
     created() {
-        //this.testAPI();
+        // Here fetch API Data
+        this.testAPI();
+        this.getConsumption();
         //this.getLastEvent();
-        //this.getConsumption();
         this.fillData1();
         this.fillData2();
     },
     data() {
         return {
-            datacollection1: null,
-            datacollection2: null,
+            received_api: [],
+            consumptions: [],
+            datacollection1: {},
+            datacollection2: {},
             currentDay: {
                 icon: 'fog',
                 temp: '17',
@@ -191,8 +194,12 @@ export default {
             }]
         }
     },
-    mounted: function() {
-        this.$
+    mounted() {
+        // XD Already working
+        // https://github.com/apertureless/vue-chartjs/blob/develop/src/examples/App.vue 
+        setInterval(() => {
+        this.fillData2()
+      }, 2000)
     },
     methods: {
         testAPI () {
@@ -235,11 +242,22 @@ export default {
                 api_url + '/Consumption/interval?buildingId=' + buildingId + '&start=' + initInterval + '&finish=' + finishInterval,
                 config
             ).then((response) => {
+                // Extraemos los datos a los diferentes arrays
+                for(let i = 0; i < 12; i++) {
+                    let obj = response.data[i];
+
+                    this.consumptions.push(obj.heating);
+
+                    // eslint-disable-next-line no-console
+                   //console.log(obj.heating);
+                }
+
                 // eslint-disable-next-line no-console
-                console.log(response)
-                this.datacollection2.datasets.data = response.data
+                //console.log(this.consumptions)
+
+
                 // eslint-disable-next-line no-console
-                console.log(this.datacollection2)
+                //console.log(this.datacollection2.datasets[0].data)
             }).catch((error) => {
                 // eslint-disable-next-line no-console
                 console.log(error)
@@ -267,17 +285,9 @@ export default {
                 datasets: [
                     {
                         label: 'Electricity (kWh)',
-                        yAxisID: 'A',
                         backgroundColor: '#8b54b2',
                         // Data for the x-axis of the chart
-                        data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
-                    },
-                    {
-                        label: 'Water (m^3)',
-                        yAxisID: 'B',
-                        backgroundColor: '#ffe74b',
-                        // Data for the x-axis of the chart
-                        data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()] 
+                        data: this.consumptions
                     }
                 ]
             }
